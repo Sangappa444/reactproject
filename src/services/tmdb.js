@@ -7,7 +7,8 @@
 
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 const BASE_URL = 'https://api.themoviedb.org/3';
-const IMG_BASE = 'https://image.tmdb.org/t/p';
+// Try using 'media.themoviedb.org' instead of 'image.tmdb.org' to bypass some mobile ISP blocks (like Jio in India)
+const IMG_BASE = 'https://media.themoviedb.org/t/p';
 
 // ---- Image URL Helpers ----
 // TMDB returns image "paths" like "/abc123.jpg"
