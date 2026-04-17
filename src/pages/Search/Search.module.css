@@ -1,0 +1,69 @@
+/* Search Page Styles */
+.searchPage {
+  padding-top: calc(var(--navbar-height) + 32px);
+  min-height: 100vh;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 40px;
+  animation: fadeInUp 0.5s ease-out;
+}
+
+.title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 8px;
+  background: linear-gradient(135deg, var(--text-primary), var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.subtitle {
+  color: var(--text-muted);
+  font-size: 1rem;
+}
+
+.searchBarWrap {
+  margin-bottom: 40px;
+}
+
+.resultInfo {
+  margin-bottom: 24px;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+.resultQuery {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.emptyState {
+  text-align: center;
+  padding: 80px 20px;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.emptyIcon {
+  font-size: 4rem;
+  margin-bottom: 20px;
+}
+
+.emptyTitle {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.emptyText {
+  color: var(--text-muted);
+  font-size: 1rem;
+}

@@ -1,0 +1,37 @@
+/* Home Page Styles */
+.homePage {
+  padding-top: var(--navbar-height);
+}
+
+.sections {
+  padding: 32px 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.demoBanner {
+  background: linear-gradient(135deg, rgba(229, 9, 20, 0.1), rgba(255, 107, 53, 0.1));
+  border: 1px solid rgba(229, 9, 20, 0.3);
+  border-radius: var(--radius-md);
+  padding: 20px 24px;
+  margin-bottom: 32px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.demoBanner strong {
+  color: var(--accent);
+}
+
+.demoIcon {
+  font-size: 1.5rem;
+}
+
+.demoLink {
+  color: var(--accent) !important;
+  text-decoration: underline !important;
+  font-weight: 600;
+}
