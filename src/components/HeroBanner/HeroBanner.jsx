@@ -10,11 +10,13 @@
 
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getBackdropUrl } from '../../services/tmdb';
+import { Film, Flame, Star, Play, Search } from 'lucide-react';
+import { getBackdropUrl, getImageUrl } from '../../services/tmdb';
 import styles from './HeroBanner.module.css';
 
 export default function HeroBanner({ movies }) {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [imgErrors, setImgErrors] = useState({});
   const navigate = useNavigate();
 
   // Limit to first 5 movies for the banner
@@ -37,25 +39,44 @@ export default function HeroBanner({ movies }) {
 
   const currentMovie = bannerMovies[currentIndex];
 
+  // Use w1280 on mobile instead of original to save bandwidth
+  const getResponsiveBackdrop = (path) => {
+    if (!path) return null;
+    const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
+    return isMobile ? getImageUrl(path, 'w1280') : getBackdropUrl(path);
+  };
+
+  const handleImgError = (movieId) => {
+    setImgErrors((prev) => ({ ...prev, [movieId]: true }));
+  };
+
   return (
     <div className={styles.hero} id="hero-banner">
       {/* Render all slides, only the active one has opacity: 1 */}
-      {bannerMovies.map((movie, index) => (
-        <div
-          key={movie.id}
-          className={`${styles.slide} ${index === currentIndex ? styles.active : ''}`}
-        >
-          {getBackdropUrl(movie.backdrop_path) ? (
-            <img
-              src={getBackdropUrl(movie.backdrop_path)}
-              alt={movie.title}
-              className={styles.backdrop}
-            />
-          ) : (
-            <div className={styles.noBackdrop}>🎬</div>
-          )}
-        </div>
-      ))}
+      {bannerMovies.map((movie, index) => {
+        const backdropUrl = getResponsiveBackdrop(movie.backdrop_path);
+        const hasError = imgErrors[movie.id];
+
+        return (
+          <div
+            key={movie.id}
+            className={`${styles.slide} ${index === currentIndex ? styles.active : ''}`}
+          >
+            {backdropUrl && !hasError ? (
+              <img
+                src={backdropUrl}
+                alt={movie.title}
+                className={styles.backdrop}
+                onError={() => handleImgError(movie.id)}
+              />
+            ) : (
+              <div className={styles.noBackdrop}>
+                <Film size={64} strokeWidth={1} />
+              </div>
+            )}
+          </div>
+        );
+      })}
 
       {/* Gradient overlays for readability */}
       <div className={styles.gradient} />
@@ -63,10 +84,13 @@ export default function HeroBanner({ movies }) {
 
       {/* Movie Info */}
       <div className={styles.content} key={currentMovie.id}>
-        <span className={styles.tag}>🔥 Trending Now</span>
+        <span className={styles.tag}>
+          <Flame size={16} fill="currentColor" /> Trending Now
+        </span>
 
         <div className={styles.heroRating}>
-          ⭐ <span className={styles.ratingValue}>{currentMovie.vote_average?.toFixed(1)}</span>
+          <Star size={18} fill="currentColor" color="var(--gold)" />
+          <span className={styles.ratingValue}>{currentMovie.vote_average?.toFixed(1)}</span>
           <span>/ 10</span>
         </div>
 
@@ -78,13 +102,13 @@ export default function HeroBanner({ movies }) {
             className={styles.btnPrimary}
             onClick={() => navigate(`/movie/${currentMovie.id}`)}
           >
-            ▶ View Details
+            <Play size={18} fill="currentColor" /> View Details
           </button>
           <button
             className={styles.btnSecondary}
             onClick={() => navigate('/search')}
           >
-            🔍 Search Movies
+            <Search size={18} /> Search Movies
           </button>
         </div>
       </div>
@@ -103,3 +127,4 @@ export default function HeroBanner({ movies }) {
     </div>
   );
 }
+

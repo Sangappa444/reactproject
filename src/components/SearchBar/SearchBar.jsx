@@ -8,6 +8,7 @@
 // - Ref: useRef to auto-focus the input on mount
 
 import { useEffect, useRef } from 'react';
+import { Search, X } from 'lucide-react';
 import styles from './SearchBar.module.css';
 
 export default function SearchBar({ value, onChange, placeholder = 'Search for movies...' }) {
@@ -21,7 +22,9 @@ export default function SearchBar({ value, onChange, placeholder = 'Search for m
   return (
     <div className={styles.searchWrapper}>
       <div className={styles.searchContainer}>
-        <span className={styles.searchIconLabel}>🔍</span>
+        <span className={styles.searchIconLabel}>
+          <Search size={20} />
+        </span>
         <input
           ref={inputRef}
           type="text"
@@ -38,7 +41,7 @@ export default function SearchBar({ value, onChange, placeholder = 'Search for m
             onClick={() => onChange('')}
             aria-label="Clear search"
           >
-            ✕
+            <X size={18} />
           </button>
         )}
       </div>

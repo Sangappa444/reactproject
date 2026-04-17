@@ -4,6 +4,7 @@
 // Shows a loading spinner or skeleton cards while data fetches.
 // Demonstrates: props for customization, conditional rendering
 
+import { Loader2 } from 'lucide-react';
 import styles from './Loader.module.css';
 
 export default function Loader({ text = 'Loading...', count = 0 }) {
@@ -27,7 +28,7 @@ export default function Loader({ text = 'Loading...', count = 0 }) {
   // Default: show spinner
   return (
     <div className={styles.loaderWrapper}>
-      <div className={styles.spinner} />
+      <Loader2 className={styles.spinnerIcon} size={48} />
       <p className={styles.loaderText}>{text}</p>
     </div>
   );

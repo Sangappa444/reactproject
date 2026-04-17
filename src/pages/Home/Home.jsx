@@ -8,6 +8,7 @@
 // - Page structure: Hero + multiple MovieGrid sections
 
 import { useState } from 'react';
+import { Info, Flame, Clapperboard, Star } from 'lucide-react';
 import HeroBanner from '../../components/HeroBanner/HeroBanner';
 import MovieGrid from '../../components/MovieGrid/MovieGrid';
 import { useTrending, usePopular, useTopRated } from '../../hooks/useMovies';
@@ -32,7 +33,9 @@ export default function Home() {
         {/* Demo mode notice */}
         {isDemoMode && (
           <div className={styles.demoBanner}>
-            <span className={styles.demoIcon}>ℹ️</span>
+            <span className={styles.demoIcon}>
+              <Info size={18} />
+            </span>
             <div>
               <strong>Demo Mode</strong> — You're seeing placeholder data. Add your free TMDB API key
               in <code>.env</code> to see real movies!{' '}
@@ -50,7 +53,11 @@ export default function Home() {
 
         {/* Trending — horizontal scroll layout */}
         <MovieGrid
-          title="🔥 Trending This Week"
+          title={
+            <>
+              <Flame size={24} fill="var(--accent)" color="var(--accent)" /> Trending This Week
+            </>
+          }
           movies={trending}
           loading={trendingLoading}
           layout="scroll"
@@ -60,7 +67,11 @@ export default function Home() {
 
         {/* Popular — grid with pagination */}
         <MovieGrid
-          title="🎬 Popular Movies"
+          title={
+            <>
+              <Clapperboard size={24} color="var(--blue)" /> Popular Movies
+            </>
+          }
           movies={popular?.results}
           loading={popularLoading}
           page={popularPage}
@@ -72,7 +83,11 @@ export default function Home() {
 
         {/* Top Rated — grid */}
         <MovieGrid
-          title="⭐ Top Rated"
+          title={
+            <>
+              <Star size={24} fill="var(--gold)" color="var(--gold)" /> Top Rated
+            </>
+          }
           movies={topRated?.results}
           loading={topRatedLoading}
           isFavorite={isFavorite}

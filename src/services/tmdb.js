@@ -12,13 +12,26 @@ const IMG_BASE = 'https://image.tmdb.org/t/p';
 // ---- Image URL Helpers ----
 // TMDB returns image "paths" like "/abc123.jpg"
 // We need to prepend the base URL + size to make a full URL
-export const getImageUrl = (path, size = 'w500') => {
+// Use w342 on mobile for faster loading, w500 on desktop
+export const getPosterUrl = (path) => {
+  if (!path) return null;
+  // Use a safer check for mobile that doesn't rely solely on window width at call time
+  const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
+  const size = isMobile ? 'w342' : 'w500';
+  return `${IMG_BASE}/${size}${path}`;
+};
+export const getImageUrl = (path, size = 'original') => {
   if (!path) return null;
   return `${IMG_BASE}/${size}${path}`;
 };
 
-export const getBackdropUrl = (path) => getImageUrl(path, 'original');
-export const getPosterUrl = (path) => getImageUrl(path, 'w500');
+export const getBackdropUrl = (path) => {
+  if (!path) return null;
+  const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
+  const size = isMobile ? 'w780' : 'original';
+  return `${IMG_BASE}/${size}${path}`;
+};
+
 export const getProfileUrl = (path) => getImageUrl(path, 'w185');
 
 // ---- Demo / Fallback Data ----

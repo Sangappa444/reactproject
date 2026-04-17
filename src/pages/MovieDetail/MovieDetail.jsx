@@ -9,6 +9,15 @@
 
 import { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { 
+  ArrowLeft, 
+  Calendar, 
+  Clock, 
+  Star, 
+  Heart, 
+  HeartOff, 
+  Film 
+} from 'lucide-react';
 import { useMovieDetail } from '../../hooks/useMovies';
 import { useFavorites } from '../../hooks/useFavorites';
 import { getBackdropUrl, getPosterUrl } from '../../services/tmdb';
@@ -63,13 +72,19 @@ export default function MovieDetail() {
       {/* Backdrop */}
       <div className={styles.backdropSection}>
         {backdropUrl ? (
-          <img src={backdropUrl} alt={movie.title} className={styles.backdropImg} />
+          <img 
+            src={backdropUrl} 
+            alt={movie.title} 
+            className={styles.backdropImg} 
+          />
         ) : (
-          <div className={styles.noBackdrop}>🎬</div>
+          <div className={styles.noBackdrop}>
+            <Film size={64} strokeWidth={1} />
+          </div>
         )}
         <div className={styles.backdropGradient} />
         <button className={styles.backBtn} onClick={() => navigate(-1)}>
-          ← Back
+          <ArrowLeft size={18} /> Back
         </button>
       </div>
 
@@ -79,9 +94,15 @@ export default function MovieDetail() {
           {/* Poster */}
           <div className={styles.posterWrap}>
             {posterUrl ? (
-              <img src={posterUrl} alt={movie.title} className={styles.poster} />
+              <img 
+                src={posterUrl} 
+                alt={movie.title} 
+                className={styles.poster} 
+              />
             ) : (
-              <div className={styles.noPosterDetail}>🎬</div>
+              <div className={styles.noPosterDetail}>
+                <Film size={80} strokeWidth={1} />
+              </div>
             )}
           </div>
 
@@ -93,11 +114,19 @@ export default function MovieDetail() {
 
             {/* Meta row: year, runtime, rating */}
             <div className={styles.metaRow}>
-              {year && <span className={styles.metaItem}>📅 {year}</span>}
-              {runtime && <span className={styles.metaItem}>⏱️ {runtime}</span>}
+              {year && (
+                <span className={styles.metaItem}>
+                  <Calendar size={16} /> {year}
+                </span>
+              )}
+              {runtime && (
+                <span className={styles.metaItem}>
+                  <Clock size={16} /> {runtime}
+                </span>
+              )}
               {movie.vote_average > 0 && (
                 <span className={styles.ratingBadge}>
-                  ⭐ {movie.vote_average.toFixed(1)} / 10
+                  <Star size={16} fill="currentColor" /> {movie.vote_average.toFixed(1)} / 10
                 </span>
               )}
             </div>
@@ -134,7 +163,15 @@ export default function MovieDetail() {
                 }
                 id="fav-toggle-btn"
               >
-                {isFavorite(movie.id) ? '💔 Remove from Favorites' : '❤️ Add to Favorites'}
+                {isFavorite(movie.id) ? (
+                  <>
+                    <HeartOff size={18} /> Remove from Favorites
+                  </>
+                ) : (
+                  <>
+                    <Heart size={18} fill="currentColor" /> Add to Favorites
+                  </>
+                )}
               </button>
             </div>
           </div>

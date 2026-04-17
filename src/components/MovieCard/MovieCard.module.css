@@ -34,6 +34,22 @@
   background: var(--bg-tertiary);
 }
 
+/* Fallback for browsers that don't support aspect-ratio (older mobile) */
+@supports not (aspect-ratio: 2/3) {
+  .posterWrap {
+    padding-top: 150%; /* 3/2 = 1.5 = 150% — same as 2:3 ratio */
+    height: 0;
+  }
+
+  .posterWrap > * {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
 .poster {
   width: 100%;
   height: 100%;
@@ -180,3 +196,29 @@
 .year {
   font-weight: 500;
 }
+
+/* Mobile-specific fixes */
+@media (max-width: 768px) {
+  .card:hover {
+    transform: none;
+  }
+
+  /* Always show fav button on mobile (no hover) */
+  .favBtn {
+    opacity: 1;
+  }
+
+  .info {
+    padding: 10px;
+  }
+
+  .title {
+    font-size: 0.85rem;
+  }
+
+  .rating {
+    font-size: 0.7rem;
+    padding: 3px 8px;
+  }
+}
+

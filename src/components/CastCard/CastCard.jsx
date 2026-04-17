@@ -4,6 +4,7 @@
 // Displays an actor's photo, name, and character.
 // Simple presentational component — just receives props and renders.
 
+import { User } from 'lucide-react';
 import { getProfileUrl } from '../../services/tmdb';
 import styles from './CastCard.module.css';
 
@@ -14,9 +15,16 @@ export default function CastCard({ actor }) {
     <div className={styles.card}>
       <div className={styles.photoWrap}>
         {photoUrl ? (
-          <img src={photoUrl} alt={actor.name} className={styles.photo} loading="lazy" />
+          <img 
+            src={photoUrl} 
+            alt={actor.name} 
+            className={styles.photo} 
+            loading="lazy" 
+          />
         ) : (
-          <div className={styles.noPhoto}>👤</div>
+          <div className={styles.noPhoto}>
+            <User size={32} />
+          </div>
         )}
       </div>
       <p className={styles.name}>{actor.name}</p>

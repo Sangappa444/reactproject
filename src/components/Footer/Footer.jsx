@@ -3,13 +3,16 @@
 // ==========================================
 // Static footer with TMDB attribution (required by their API terms).
 
+import { Clapperboard, ExternalLink } from 'lucide-react';
 import styles from './Footer.module.css';
 
 export default function Footer() {
   return (
     <footer className={styles.footer} id="app-footer">
       <div className={styles.footerContent}>
-        <div className={styles.footerLogo}>🎬 CineVerse</div>
+        <div className={styles.footerLogo}>
+          <Clapperboard size={20} color="var(--accent)" /> CineVerse
+        </div>
         <p className={styles.footerText}>
           Discover movies, save your favorites, and explore the world of cinema.
           Built with React + TMDB API.
@@ -21,7 +24,7 @@ export default function Footer() {
             rel="noopener noreferrer"
             className={styles.footerLink}
           >
-            TMDB
+            TMDB <ExternalLink size={12} />
           </a>
           <a
             href="https://react.dev"
@@ -29,7 +32,7 @@ export default function Footer() {
             rel="noopener noreferrer"
             className={styles.footerLink}
           >
-            React
+            React <ExternalLink size={12} />
           </a>
           <a
             href="https://vite.dev"
@@ -37,7 +40,7 @@ export default function Footer() {
             rel="noopener noreferrer"
             className={styles.footerLink}
           >
-            Vite
+            Vite <ExternalLink size={12} />
           </a>
         </div>
         <div className={styles.tmdbCredit}>

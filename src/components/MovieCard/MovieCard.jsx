@@ -8,12 +8,15 @@
 // - CSS Modules: styles.card, styles.poster, etc.
 // - useNavigate: programmatic navigation to detail page
 
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Star, Heart, Film } from 'lucide-react';
 import { getPosterUrl } from '../../services/tmdb';
 import styles from './MovieCard.module.css';
 
 export default function MovieCard({ movie, isFavorite, onToggleFavorite }) {
   const navigate = useNavigate();
+  const [imgError, setImgError] = useState(false);
 
   const {
     id,
@@ -45,20 +48,24 @@ export default function MovieCard({ movie, isFavorite, onToggleFavorite }) {
     >
       {/* Poster Image */}
       <div className={styles.posterWrap}>
-        {posterUrl ? (
+        {posterUrl && !imgError ? (
           <img
             src={posterUrl}
             alt={title}
             className={styles.poster}
+            onError={() => setImgError(true)}
             loading="lazy"
+
           />
         ) : (
-          <div className={styles.noPoster}>🎬</div>
+          <div className={styles.noPoster}>
+            <Film size={48} strokeWidth={1.5} />
+          </div>
         )}
 
         {/* Rating Badge */}
         <div className={`${styles.rating} ${ratingClass}`}>
-          ⭐ {rating}
+          <Star size={14} fill="currentColor" /> {rating}
         </div>
 
         {/* Favorite Button */}
@@ -71,7 +78,11 @@ export default function MovieCard({ movie, isFavorite, onToggleFavorite }) {
             }}
             aria-label={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
           >
-            {isFavorite ? '❤️' : '🤍'}
+            {isFavorite ? (
+              <Heart size={20} fill="currentColor" />
+            ) : (
+              <Heart size={20} />
+            )}
           </button>
         )}
 

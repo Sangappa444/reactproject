@@ -10,6 +10,7 @@
 import { useState } from 'react';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import MovieGrid from '../../components/MovieGrid/MovieGrid';
+import { AlertTriangle, Search as SearchIcon, Film } from 'lucide-react';
 import { useSearch } from '../../hooks/useMovies';
 import { useFavorites } from '../../hooks/useFavorites';
 import styles from './Search.module.css';
@@ -45,7 +46,9 @@ export default function Search() {
       {/* Results */}
       {error && (
         <div className={styles.emptyState}>
-          <div className={styles.emptyIcon}>⚠️</div>
+          <div className={styles.emptyIcon}>
+            <AlertTriangle size={48} color="var(--accent)" />
+          </div>
           <h3 className={styles.emptyTitle}>Something went wrong</h3>
           <p className={styles.emptyText}>{error}</p>
         </div>
@@ -59,7 +62,9 @@ export default function Search() {
 
       {query && !loading && results.length === 0 && (
         <div className={styles.emptyState}>
-          <div className={styles.emptyIcon}>🔍</div>
+          <div className={styles.emptyIcon}>
+            <SearchIcon size={48} strokeWidth={1.5} />
+          </div>
           <h3 className={styles.emptyTitle}>No results found</h3>
           <p className={styles.emptyText}>Try searching for something else</p>
         </div>
@@ -67,7 +72,9 @@ export default function Search() {
 
       {!query && !loading && (
         <div className={styles.emptyState}>
-          <div className={styles.emptyIcon}>🎬</div>
+          <div className={styles.emptyIcon}>
+            <Film size={48} strokeWidth={1.5} />
+          </div>
           <h3 className={styles.emptyTitle}>Start typing to search</h3>
           <p className={styles.emptyText}>Search by movie title</p>
         </div>

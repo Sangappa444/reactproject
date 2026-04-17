@@ -10,6 +10,16 @@
 
 import { useState, useEffect } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { 
+  Clapperboard, 
+  Home, 
+  Heart, 
+  Search, 
+  Sun, 
+  Moon, 
+  X, 
+  Menu 
+} from 'lucide-react';
 import { useTheme } from '../../context/ThemeContext';
 import styles from './Navbar.module.css';
 
@@ -37,7 +47,9 @@ export default function Navbar() {
       <div className={styles.navContent}>
         {/* Logo — Link takes you to home page */}
         <Link to="/" className={styles.logo}>
-          <span className={styles.logoIcon}>🎬</span>
+          <span className={styles.logoIcon}>
+            <Clapperboard size={28} className={styles.iconPrimary} />
+          </span>
           CineVerse
         </Link>
 
@@ -52,7 +64,7 @@ export default function Navbar() {
             }
             onClick={() => setMobileOpen(false)}
           >
-            🏠 Home
+            <Home size={18} /> Home
           </NavLink>
           <NavLink
             to="/favorites"
@@ -61,7 +73,7 @@ export default function Navbar() {
             }
             onClick={() => setMobileOpen(false)}
           >
-            ❤️ Favorites
+            <Heart size={18} /> Favorites
           </NavLink>
 
           {/* Search icon — navigates to search page */}
@@ -74,7 +86,7 @@ export default function Navbar() {
             aria-label="Search movies"
             id="nav-search-btn"
           >
-            🔍
+            <Search size={20} />
           </button>
 
           {/* Theme Toggle */}
@@ -84,7 +96,7 @@ export default function Navbar() {
             aria-label="Toggle theme"
             id="theme-toggle-btn"
           >
-            {theme === 'dark' ? '☀️' : '🌙'}
+            {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
           </button>
         </div>
 
@@ -95,7 +107,7 @@ export default function Navbar() {
           aria-label="Toggle menu"
           id="mobile-menu-btn"
         >
-          {mobileOpen ? '✕' : '☰'}
+          {mobileOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
     </nav>

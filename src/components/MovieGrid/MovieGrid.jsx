@@ -9,6 +9,7 @@
 // - "key" prop: React needs a unique key for each list item
 //   so it can efficiently update only changed items
 
+import { Film, ChevronLeft, ChevronRight } from 'lucide-react';
 import MovieCard from '../MovieCard/MovieCard';
 import Loader from '../Loader/Loader';
 import styles from './MovieGrid.module.css';
@@ -38,7 +39,9 @@ export default function MovieGrid({
       <section className={styles.section}>
         {title && <h2 className="section-title">{title}</h2>}
         <div className={styles.empty}>
-          <div className={styles.emptyIcon}>🎬</div>
+          <div className={styles.emptyIcon}>
+            <Film size={48} strokeWidth={1.5} />
+          </div>
           <p className={styles.emptyText}>No movies found</p>
         </div>
       </section>
@@ -70,7 +73,7 @@ export default function MovieGrid({
             onClick={() => onPageChange(page - 1)}
             disabled={page <= 1}
           >
-            ← Previous
+            <ChevronLeft size={18} /> Previous
           </button>
           <span className={styles.pageInfo}>
             Page {page} of {Math.min(totalPages, 500)}
@@ -80,7 +83,7 @@ export default function MovieGrid({
             onClick={() => onPageChange(page + 1)}
             disabled={page >= Math.min(totalPages, 500)}
           >
-            Next →
+            Next <ChevronRight size={18} />
           </button>
         </div>
       )}
